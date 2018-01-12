@@ -3,13 +3,13 @@ package be.pxl.callLog;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class CallLogWriter extends Thread {
-	private HashSet<CallLog> callLogs;
+	private LinkedHashSet<CallLog> callLogs;
 	private String fileName;
 	
-	public CallLogWriter(HashSet<CallLog> callLogs, String fileName) {
+	public CallLogWriter(LinkedHashSet<CallLog> callLogs, String fileName) {
 		this.callLogs = callLogs;
 		this.fileName = fileName;
 	}
