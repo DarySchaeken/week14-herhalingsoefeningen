@@ -3,13 +3,13 @@ package be.pxl.sacramentoHomes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class PropertyListWriter extends Thread {
-		private HashSet<Property> properties;
+		private LinkedHashSet<Property> properties;
 		private String listname;
 		
-		public PropertyListWriter(HashSet<Property> properties, String listname) {
+		public PropertyListWriter(LinkedHashSet<Property> properties, String listname) {
 			this.properties = properties;
 			this.listname = listname;
 		}

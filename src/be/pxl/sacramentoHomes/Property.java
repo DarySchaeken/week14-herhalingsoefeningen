@@ -95,20 +95,8 @@ public class Property {
 		return longitude;
 	}
 
-	public int compareToDate(Property p) {
-		if (this.getSaleDate().equals(p.getSaleDate())) {
-			return 0;
-		} else if (this.getSaleDate().isAfter(p.getSaleDate())) {
-			return -1;
-		} else {
-			return 1;
-		}
-	}
-
 	public int compareToPrice(Property p) {
-		if (this.getPrice() == (p.getPrice())) {
-			return 0;
-		} else if (this.getPrice() > p.getPrice()) {
+		if (this.getPrice() >= p.getPrice()) {
 			return 1;
 		} else {
 			return -1;

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 public class PropertySystem {
@@ -20,22 +21,26 @@ public class PropertySystem {
 		return properties.size();
 	}
 
-	public HashSet<Property> propertiesAbovePrice(int price) {
-		return properties.stream().filter(p -> p.getPrice() > price).collect(Collectors.toCollection(HashSet::new));
+	public LinkedHashSet<Property> propertiesAbovePrice(int price) {
+		return properties.stream().filter(p -> p.getPrice() > price).sorted((p1, p2) -> p1.compareToPrice(p2))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	public HashSet<Property> propertiesForZipCode(int zipcode) {
-		return properties.stream().filter(p -> p.getZip() == zipcode).collect(Collectors.toCollection(HashSet::new));
+	public LinkedHashSet<Property> propertiesForZipCode(int zipcode) {
+		return properties.stream().filter(p -> p.getZip() == zipcode)
+				.sorted((p1, p2) -> p1.getSaleDate().compareTo(p2.getSaleDate()))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	public HashSet<Property> propertiesSoldAfter(LocalDate date) {
+	public LinkedHashSet<Property> propertiesSoldAfter(LocalDate date) {
 		return properties.stream().filter(p -> p.getSaleDate().isAfter(date))
-				.collect(Collectors.toCollection(HashSet::new));
+				.sorted((p1, p2) -> p1.getSaleDate().compareTo(p2.getSaleDate()))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	public HashSet<Property> lastPropertiesSold(int amount) {
-		return properties.stream().sorted((p1, p2) -> p1.compareToDate(p2)).limit(amount)
-				.collect(Collectors.toCollection(HashSet::new));
+	public LinkedHashSet<Property> lastPropertiesSold(int amount) {
+		return properties.stream().sorted((p1, p2) -> p1.getSaleDate().compareTo(p2.getSaleDate())).limit(amount)
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
 	public Property findCheapest() {

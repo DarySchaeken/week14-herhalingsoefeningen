@@ -18,9 +18,6 @@ public class CallLogApplication {
 
 		for (CallLogReader reader : readers) {
 			reader.start();
-		}
-
-		for (CallLogReader reader : readers) {
 			try {
 				reader.join();
 			} catch (InterruptedException e) {
